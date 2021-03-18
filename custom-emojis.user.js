@@ -2,7 +2,8 @@
 // @name        My Anonamouse Shoutbox custom emojis
 // @namespace   Violentmonkey Scripts
 // @match       https://www.myanonamouse.net/index.php
-// @match		https://www.myanonamouse.net/shoutbox/index.php
+// @match	https://www.myanonamouse.net/shoutbox/index.php
+// @match	https://www.myanonamouse.net/shoutbox
 // @grant       none
 // @version     1.0
 // @author      jackowski626
