@@ -4,6 +4,7 @@
 // @match       https://www.myanonamouse.net/index.php
 // @match	https://www.myanonamouse.net/shoutbox/index.php
 // @match	https://www.myanonamouse.net/shoutbox
+// @match       https://www.myanonamouse.net/
 // @grant       none
 // @version     1.0
 // @author      jackowski626
@@ -15,6 +16,8 @@
 // EDIT EMOJIS HERE
 ////////////////////////////////
 
+/* You can have multiple emojis with the same image urls, this works like aliases, only unique ones will appear in the list */
+/* You can resize (something like 18x18) your images/emotes and upload them here: https://www.myanonamouse.net/bitbucket-upload.php */
 
 var emojis = {
 	"c":"https://cdn.discordapp.com/emojis/724783214463418470.png",
