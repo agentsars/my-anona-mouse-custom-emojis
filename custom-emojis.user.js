@@ -6,8 +6,8 @@
 // @match	https://www.myanonamouse.net/shoutbox
 // @match       https://www.myanonamouse.net/
 // @grant       none
-// @version     1.0
-// @author      jackowski626
+// @version     1.0.2
+// @author      agentsars
 // @description 06/03/2021, 20:52:04
 // ==/UserScript==
 
@@ -17,16 +17,21 @@
 ////////////////////////////////
 
 /* You can have multiple emojis with the same image urls, this works like aliases, only unique ones will appear in the list */
-/* You can resize (something like 18x18) your images/emotes and upload them here: https://www.myanonamouse.net/bitbucket-upload.php */
+/* You can resize (something like 18x18, or 16x16) your images/emotes and upload them here: https://www.myanonamouse.net/bitbucket-upload.php */
 
 var emojis = {
-	"c":"https://cdn.discordapp.com/emojis/724783214463418470.png",
-	"concern":"https://cdn.discordapp.com/emojis/724783214463418470.png",
-	"hap":"https://image.jeuxvideo.com/smileys_img/18.gif",
-	"j0y":"https://cdn.discordapp.com/emojis/799046720733708299.png",
-	"y":"https://cdn.discordapp.com/emojis/724781505578270791.png",
-	"yoba":"https://cdn.discordapp.com/emojis/724781505578270791.png"
+	"c":"https://cdn.myanonamouse.net/imagebucket/185207/concern.png",
+	"concern":"https://cdn.myanonamouse.net/imagebucket/185207/concern.png",
+	"hap":"https://cdn.myanonamouse.net/imagebucket/185207/hap.png",
+	"y":"https://cdn.myanonamouse.net/imagebucket/185207/yobaface.png",
+	"troll":"https://cdn.myanonamouse.net/imagebucket/185207/troll.png"
 }
+
+
+/* Additional settings */
+
+/* Preventing standard emojis from loading in the emoji panel (since it takes time) */
+var disableStockEmojis = false;
 
 /////////////////////////////////
 // END
@@ -113,3 +118,33 @@ function addEmotesToBlock() {
 }
 
 var timer = setInterval(addEmotesToBlock, 200);
+
+
+
+//Removing stock emojis if enabled
+
+//This function lets us override external .js file functions
+//Source https://shlomif-tech.livejournal.com/3821.html
+function embedFunction(s) {
+document.body.appendChild(document.createElement('script'))
+.innerHTML=s.toString().replace(/([\s\S]*?return;){2}([\s\S]*)}/,'$2');
+}
+
+if (disableStockEmojis) {
+  loadAndEnableSmileySelector = function(){}
+  doDisplayOfSmilies = function(){}
+
+  embedFunction(loadAndEnableSmileySelector);
+  embedFunction(doDisplayOfSmilies);
+
+  //Adding listener to trigger whenSiteLoaded function when website has finished loading
+  window.addEventListener('load', function() {
+      whenSiteLoaded();
+  }, false); 
+}
+
+//Removes the "dynamic list loading in progress" text from the #dlsl div, which allows custom emojis to load
+function whenSiteLoaded() {  
+  var emojiBlock = document.getElementById('dlsl');
+  emojiBlock.innerText = '';
+}
