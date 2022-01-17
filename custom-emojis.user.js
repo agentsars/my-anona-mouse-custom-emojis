@@ -6,7 +6,7 @@
 // @match	https://www.myanonamouse.net/shoutbox
 // @match       https://www.myanonamouse.net/
 // @grant       none
-// @version     1.0.2
+// @version     1.0.3
 // @author      agentsars
 // @description 06/03/2021, 20:52:04
 // ==/UserScript==
@@ -24,14 +24,15 @@ var emojis = {
 	"concern":"https://cdn.myanonamouse.net/imagebucket/185207/concern.png",
 	"hap":"https://cdn.myanonamouse.net/imagebucket/185207/hap.png",
 	"y":"https://cdn.myanonamouse.net/imagebucket/185207/yobaface.png",
-	"troll":"https://cdn.myanonamouse.net/imagebucket/185207/troll.png"
+	"troll":"https://cdn.myanonamouse.net/imagebucket/185207/troll.png",
+  "epyc":"https://cdn.myanonamouse.net/imagebucket/185207/epycgamer.png"
 }
 
 
 /* Additional settings */
 
 /* Preventing standard emojis from loading in the emoji panel (since it takes time) */
-var disableStockEmojis = false;
+var disableStockEmojis = true;
 
 /////////////////////////////////
 // END
@@ -126,13 +127,12 @@ var timer = setInterval(addEmotesToBlock, 200);
 //This function lets us override external .js file functions
 //Source https://shlomif-tech.livejournal.com/3821.html
 function embedFunction(s) {
-document.body.appendChild(document.createElement('script'))
-.innerHTML=s.toString().replace(/([\s\S]*?return;){2}([\s\S]*)}/,'$2');
+document.body.appendChild(document.createElement('script')).innerHTML=s.toString(); 
 }
 
 if (disableStockEmojis) {
-  loadAndEnableSmileySelector = function(){}
-  doDisplayOfSmilies = function(){}
+  function loadAndEnableSmileySelector(){}
+  function doDisplayOfSmilies(){}
 
   embedFunction(loadAndEnableSmileySelector);
   embedFunction(doDisplayOfSmilies);
