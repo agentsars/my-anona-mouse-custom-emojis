@@ -6,7 +6,7 @@
 // @match	https://www.myanonamouse.net/shoutbox
 // @match       https://www.myanonamouse.net/
 // @grant       none
-// @version     1.0.3
+// @version     1.0.4
 // @author      agentsars
 // @description 06/03/2021, 20:52:04
 // ==/UserScript==
@@ -32,7 +32,7 @@ var emojis = {
 /* Additional settings */
 
 /* Preventing standard emojis from loading in the emoji panel (since it takes time) */
-var disableStockEmojis = true;
+var disableStockEmojis = false;
 
 /////////////////////////////////
 // END
@@ -100,13 +100,12 @@ function appendToInput(text) {
 }
 
 function addEmotesToBlock() {
+  console.log('Welcome to MaM Custom Shoutbox Emoji Adder. Loading emojis...');
 	var emojiBlock = document.getElementById('dlsl');
 	if(emojiBlock.parentElement.innerText == "dynamic list loading in progress") {
 		return;
 	}
-	console.log("adding");
 	for (let i = keylen(noDupesEmojis) - 1; i >= 0; i --) {
-		console.log("adding " + elemAtIndex(noDupesEmojis, i));
 		let imgNode = document.createElement("img");
 		imgNode.alt = ":" + keyAtIndex(noDupesEmojis, i) + ":";
 		imgNode.title = ":" + keyAtIndex(noDupesEmojis, i) + ":";
